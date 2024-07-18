@@ -1,0 +1,119 @@
+@import url('./assets/css/reset.css');
+@import url('./assets/fonts/fonts.css');
+
+:root {
+    --color-primary: #2A6CEA;
+    --color-primary-80: rgba(42, 108, 234, 0.8);
+    --headline-5-color: #191c1f;
+
+    --color-black: #191c1f;
+    --color-dark-gray: #5e646a;
+    --color-gray: #83898f;
+    --color-mid-gray: #c2c8cd;
+    --color-light-gray: #eceff2;
+    --color-extralight-gray: #f6f8fa;
+    --color-white: #ffffff;
+    --color-green: #25cd82;
+    --color-red: #f13636;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Graphik LCG', sans-serif;
+    font-style: normal;
+    font-size: 16px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Graphik LCG', sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.23;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+h3 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.25px;
+}
+
+h4 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.33;
+}
+
+h5 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h6 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.button {
+    padding: 20px 40px;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.button:active {
+    transform: translate(0, -1px);
+}
+
+.button-default {
+    background-color: var(--color-light-gray);
+    color: var(--color-black);
+}
+
+.button-default:hover {
+    background-color: var(--color-white);
+}
+
+.button-primary {
+    background-color: var(--color-primary);
+    font-weight: 400;
+    color: var(--color-white);
+}
+
+.button-primary[disabled], 
+.button-primary[disabled]:hover {
+    background-color: #9cbcfb;
+    cursor: not-allowed;
+}
+
+.button[disabled]:active {
+    transform: none;
+}
+
+.button-primary:hover {
+    background-color: var(--color-primary-80);
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1256px;
+    padding: 0 20px;
+    /* border: 1px solid #686767; */
+}
