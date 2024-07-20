@@ -77,6 +77,7 @@ const Form: React.FC = (): React.ReactElement => {
               name="phone"
               label="Телефон"
               mask="+{7} (000) 000 00 00"
+              inputMode="numeric"
               className={formik.errors.phone ? 'invalid' : null}
               errorText={formik.errors.phone ?? null}
               handleBlur={formik.handleBlur}

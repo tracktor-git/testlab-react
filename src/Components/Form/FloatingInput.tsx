@@ -16,6 +16,7 @@ type InputProps = {
   handleBlur: (e: React.FocusEvent<any, Element>) => void,
   isSubmitting: boolean,
   isComplete?: boolean,
+  inputMode?: string | null,
 };
 
 const FloatingInput: React.FC<InputProps> = (props) => {
@@ -30,12 +31,14 @@ const FloatingInput: React.FC<InputProps> = (props) => {
     handleChange,
     handleBlur,
     isComplete,
+    inputMode,
   } = props;
 
   return (
     <div className="floating-input">
       <MaskedInput
         type="text"
+        inputMode={inputMode}
         id={id}
         name={name}
         autoComplete="off"
