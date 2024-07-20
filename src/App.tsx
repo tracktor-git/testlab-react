@@ -14,11 +14,13 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <HowItWorks />
-      <Reviews />
-      <Faq />
-      <Columns />
-      <Form />
+      <main>
+        <HowItWorks />
+        <Reviews />
+        <Faq />
+        <Columns />
+        <Form />
+      </main>
       <Footer />
       <ToastContainer hideProgressBar />
     </>

@@ -69,6 +69,7 @@ const Form: React.FC = (): React.ReactElement => {
         </div>
         <form className="form-wrapper" onSubmit={formik.handleSubmit} ref={formRef}>
           <div className="input-wrapper">
+
             <div className="floating-input">
               <input
                 type="text"
@@ -85,6 +86,7 @@ const Form: React.FC = (): React.ReactElement => {
               <span className="error-text">{formik.errors.name}</span>
               <div className="input-state" />
             </div>
+
             <div className="floating-input">
               <MaskedInput
                 type="text"
@@ -103,6 +105,7 @@ const Form: React.FC = (): React.ReactElement => {
               <div className="input-state" />
             </div>
           </div>
+
           <div className="input-wrapper">
             <div className="checkbox-wrapper">
               <input
@@ -114,6 +117,7 @@ const Form: React.FC = (): React.ReactElement => {
               />
               <label htmlFor="agree">Согласен, отказываюсь</label>
             </div>
+
             <button
               type="submit"
               className="button button-primary"
@@ -122,6 +126,7 @@ const Form: React.FC = (): React.ReactElement => {
               Отправить
             </button>
           </div>
+
         </form>
       </div>
     </section>

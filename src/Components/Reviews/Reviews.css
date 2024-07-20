@@ -1,5 +1,3 @@
-/* REVIEWS START */
-
 .reviews {
     padding: 57px 0 45px 0;
     background-color: var(--color-extralight-gray);
@@ -12,6 +10,7 @@
 
 .reviews-slider {
     position: relative;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -122,6 +121,12 @@
     background-color: var(--color-primary);
 }
 
+@media (max-width: 1279px) {
+    .reviews-slider {
+        max-width: 860px;
+    }
+}
+
 @media (max-width: 870px) {
     .slider-button.prev,
     .slider-button.next {
@@ -129,4 +134,9 @@
     }
 }
 
-/* REVIEWS END */
+@media (max-width: 420px) {
+    .reviews-title h2 {
+      font-size: 24px;
+      line-height: 1.33;
+    }
+}
