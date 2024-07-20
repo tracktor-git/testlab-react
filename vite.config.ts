@@ -9,7 +9,7 @@ export default defineConfig({
     svgr(),
     Checker({ typescript: true }),
   ],
-  base: './',
+  base: './testlab-react',
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
