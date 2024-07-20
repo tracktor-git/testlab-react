@@ -23,7 +23,7 @@ const Columns: React.FC = () => {
     if (isMounted.current) {
       setIsLoading(true);
 
-      fetch('./data/column.json')
+      fetch('./data/columns.json')
         .then((data) => data.json())
         .then((data) => dispatch(setColumns(data)))
         .catch((error) => {
