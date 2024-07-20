@@ -8,7 +8,7 @@ const Faq: React.FC = () => {
 
   /* Сымитируем, будто данные приходят откуда-то с API */
   React.useEffect(() => {
-    fetch('./accordion.json')
+    fetch('./data/accordion.json')
       .then((data) => data.json())
       .then((data) => setAccordionData(data))
       .catch((error) => console.warn(error));

@@ -8,6 +8,12 @@ import Button from '../Common/Button/Button';
 const Header: React.FC = () => {
   const [isNavOpened, setIsNavOpened] = React.useState(false);
 
+  const bodyRef = React.useRef(document.body);
+
+  React.useEffect(() => {
+    bodyRef.current.classList.toggle('nav-open');
+  }, [isNavOpened]);
+
   const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();
     setIsNavOpened(false);
@@ -19,9 +25,9 @@ const Header: React.FC = () => {
   };
 
   const handleNavClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLDivElement;
+    const target = event.currentTarget as HTMLDivElement;
 
-    if (target.tagName === 'UL') {
+    if (target.tagName === 'DIV') {
       setIsNavOpened(false);
     }
   };
@@ -32,18 +38,17 @@ const Header: React.FC = () => {
     }
   };
 
-  const burgerClassName = isNavOpened ? 'burger-menu-button open' : 'burger-menu-button';
-
   return (
     <header className="header">
       <div className="container">
         <div className="header-top">
-          <a href="/" className="logo">
+
+          <a href="./" className="logo">
             <img src={logo} alt="TestLab Logo" />
             <span>testLab</span>
           </a>
-          <button type="button" className={burgerClassName} aria-label="Mobile nav button" />
-          <nav className="nav">
+
+          <nav className={isNavOpened ? 'nav nav-open' : 'nav'}>
             <div role="button" tabIndex={0} onClick={handleNavClick} onKeyUp={handleKeyUp}>
               <ul className="nav-list">
                 <li className="nav-item"><a href="#how-it-works" onClick={handleLinkClick}>Как это работает</a></li>
@@ -53,7 +58,15 @@ const Header: React.FC = () => {
               </ul>
             </div>
           </nav>
+
+          <button
+            type="button"
+            className="burger-menu-button"
+            aria-label="Mobile nav button"
+            onClick={() => setIsNavOpened(!isNavOpened)}
+          />
         </div>
+
         <div className="header-bottom">
           <div className="header-title">
             <h1>Говорят, никогда не поздно сменить профессию</h1>
@@ -61,6 +74,7 @@ const Header: React.FC = () => {
           <p className="header-text">Сделай круто тестовое задание и у тебя получится</p>
           <Button label="Проще простого!" type="button" severity="default" className="header-button" />
         </div>
+
       </div>
     </header>
   );
