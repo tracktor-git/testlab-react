@@ -52,5 +52,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-explicit-any': 0,
     'functional/no-mixed-types': 0,
+    'react/require-default-props': 0,
   },
 };
