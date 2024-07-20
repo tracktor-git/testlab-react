@@ -6,7 +6,11 @@ const HeaderNav: React.FC = () => {
   const bodyRef = React.useRef(document.body);
 
   React.useEffect(() => {
-    bodyRef.current.classList.toggle('nav-open');
+    if (isNavOpened) {
+      bodyRef.current.classList.add('nav-open');
+    } else {
+      bodyRef.current.classList.remove('nav-open');
+    }
   }, [isNavOpened]);
 
   const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -32,6 +36,7 @@ const HeaderNav: React.FC = () => {
       setIsNavOpened(false);
     }
   };
+
   return (
     <div className="nav-wrapper">
       <nav className={isNavOpened ? 'nav nav-open' : 'nav'}>
