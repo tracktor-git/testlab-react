@@ -1,18 +1,33 @@
 import React from 'react';
-import Accordion, { AccordionData } from './Accordion';
+import { toast } from 'react-toastify';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { setFaq } from '../../redux/slices/faqSlice';
 
+import Accordion from './Accordion';
 import './Faq.css';
 
 const Faq: React.FC = () => {
-  const [accordionData, setAccordionData] = React.useState<AccordionData[]>([]);
+  const faqData = useAppSelector((state) => state.faq);
+  const dispatch = useAppDispatch();
+
+  const isMounted = React.useRef(false);
+
+  React.useEffect(() => {
+    isMounted.current = !isMounted.current;
+  }, []);
 
   /* Сымитируем, будто данные приходят откуда-то с API */
   React.useEffect(() => {
-    fetch('./data/accordion.json')
-      .then((data) => data.json())
-      .then((data) => setAccordionData(data))
-      .catch((error) => console.warn(error));
-  }, []);
+    if (isMounted.current) {
+      fetch('./data/accordion.json')
+        .then((data) => data.json())
+        .then((data) => dispatch(setFaq(data)))
+        .catch((error) => {
+          toast.error('Не удалось загрузить вопросы и ответы...');
+          console.warn(error.message);
+        });
+    }
+  }, [dispatch]);
 
   return (
     <section id="faq" className="faq">
@@ -22,10 +37,12 @@ const Faq: React.FC = () => {
         </div>
         <div className="accordion-wrapper">
           {
-            accordionData.map(({ id, body, header }) => (
+            faqData.map(({ id, body, header }) => (
               <Accordion key={id} header={header} body={body} />
             ))
           }
+
+          {faqData.length < 1 && <div className="data-empty">Нет данных...</div>}
         </div>
       </div>
     </section>

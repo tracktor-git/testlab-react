@@ -23,7 +23,9 @@
     "vite": "^5.3.4",
     "vite-plugin-checker": "^0.7.2",
     "vite-plugin-svgr": "^4.2.0",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "react-redux": "^9.1.2",
+    "@reduxjs/toolkit": "^2.2.6"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
