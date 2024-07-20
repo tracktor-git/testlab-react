@@ -4,9 +4,12 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { setFaq } from '../../redux/slices/faqSlice';
 
 import Accordion from './Accordion';
+import Spinner from '../Spinner/Spinner';
+
 import './Faq.css';
 
 const Faq: React.FC = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
   const faqData = useAppSelector((state) => state.faq);
   const dispatch = useAppDispatch();
 
@@ -19,13 +22,16 @@ const Faq: React.FC = () => {
   /* Сымитируем, будто данные приходят откуда-то с API */
   React.useEffect(() => {
     if (isMounted.current) {
+      setIsLoading(true);
+
       fetch('./data/accordion.json')
         .then((data) => data.json())
         .then((data) => dispatch(setFaq(data)))
         .catch((error) => {
           toast.error('Не удалось загрузить вопросы и ответы...');
           console.warn(error.message);
-        });
+        })
+        .finally(() => setIsLoading(false));
     }
   }, [dispatch]);
 
@@ -42,7 +48,8 @@ const Faq: React.FC = () => {
             ))
           }
 
-          {faqData.length < 1 && <div className="data-empty">Нет данных...</div>}
+          {isLoading && <Spinner />}
+          {(!isLoading && faqData.length < 1) && <div className="data-empty">Нет данных...</div>}
         </div>
       </div>
     </section>

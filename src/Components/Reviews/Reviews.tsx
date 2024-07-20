@@ -8,12 +8,14 @@ import { setReviews } from '../../redux/slices/reviewsSlice';
 import Slide from './Slide';
 import SlideNavButtons from './SlideNavButtons';
 import SliderPagination from './SliderPagination';
+import Spinner from '../Spinner/Spinner';
 
 import './Reviews.css';
 
 const Reviews: React.FC = () => {
   const [offset, setOffset] = React.useState(0);
   const [slidesPerPage, setSlidesPerPage] = React.useState(3);
+  const [isLoading, setIsLoading] = React.useState(false);
   const { isMobile, isTablet, isDesktop } = useMatchMedia();
 
   const isMounted = React.useRef(false);
@@ -29,13 +31,16 @@ const Reviews: React.FC = () => {
   /* Имитируем загрузку отзывов с сервера */
   React.useEffect(() => {
     if (isMounted.current) {
+      setIsLoading(true);
+
       fetch('./data/reviews.json')
         .then((data) => data.json())
         .then((data) => dispatch(setReviews(data)))
         .catch((error) => {
           toast.error('Не удалось загрузить отзывы...');
           console.error(error.message);
-        });
+        })
+        .finally(() => setIsLoading(false));
     }
   }, [dispatch]);
 
@@ -66,7 +71,8 @@ const Reviews: React.FC = () => {
           <h2>Отзывы</h2>
         </div>
 
-        {reviews.length < 1 && <div className="data-empty">Нет отзывов...</div>}
+        {isLoading && <Spinner />}
+        {(!isLoading && reviews.length < 1) && <div className="data-empty">Нет отзывов...</div>}
 
         <div className="reviews-slider" {...swipeHandlers}>
           {reviews.slice(offset, offset + slidesPerPage).map((slide) => (
