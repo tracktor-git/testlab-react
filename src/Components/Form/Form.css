@@ -85,6 +85,12 @@
 
 .floating-input input.invalid {
     border: 2px solid var(--color-red);
+    background-color: var(--color-white);
+}
+
+.floating-input input.completed {
+    border: 2px solid var(--color-light-gray);
+    background-color: var(--color-white);
 }
 
 .floating-input input:not([placeholder=" "])::placeholder {

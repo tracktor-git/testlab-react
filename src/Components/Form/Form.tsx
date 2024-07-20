@@ -69,7 +69,7 @@ const Form: React.FC = (): React.ReactElement => {
               handleBlur={formik.handleBlur}
               handleChange={formik.handleChange}
               isSubmitting={formik.isSubmitting}
-              isComplete={Boolean(formik.touched.name) && !formik.errors.name}
+              isCompleted={Boolean(formik.touched.name) && !formik.errors.name}
             />
 
             <FloatingInput
@@ -83,7 +83,7 @@ const Form: React.FC = (): React.ReactElement => {
               handleBlur={formik.handleBlur}
               handleChange={formik.handleChange}
               isSubmitting={formik.isSubmitting}
-              isComplete={Boolean(formik.touched.phone) && !formik.errors.phone}
+              isCompleted={Boolean(formik.touched.phone) && !formik.errors.phone}
             />
           </div>
 

@@ -10,12 +10,12 @@ type InputProps = {
   name: string,
   label: string,
   mask?: string,
-  className: string | null,
+  className?: string | null,
   errorText: string | null,
   handleChange: (e: React.ChangeEvent<any>) => void,
   handleBlur: (e: React.FocusEvent<any, Element>) => void,
   isSubmitting: boolean,
-  isComplete?: boolean,
+  isCompleted?: boolean,
   inputMode?: string | null,
 };
 
@@ -30,7 +30,7 @@ const FloatingInput: React.FC<InputProps> = (props) => {
     isSubmitting,
     handleChange,
     handleBlur,
-    isComplete,
+    isCompleted,
     inputMode,
   } = props;
 
@@ -43,7 +43,7 @@ const FloatingInput: React.FC<InputProps> = (props) => {
         name={name}
         autoComplete="off"
         mask={mask}
-        className={className}
+        className={!isCompleted ? className : `${className} completed`}
         placeholder=" "
         onChange={handleChange}
         onBlur={handleBlur}
@@ -52,7 +52,7 @@ const FloatingInput: React.FC<InputProps> = (props) => {
       {/* eslint-disable-next-line */}
       <label htmlFor={name}>{label}</label> 
       {errorText && <span className="error-text">{errorText}</span>}
-      {isComplete && <div className="input-state success" />}
+      {isCompleted && <div className="input-state success" />}
       {errorText && <div className="input-state error" />}
     </div>
   );
