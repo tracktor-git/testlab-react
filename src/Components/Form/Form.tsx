@@ -64,6 +64,9 @@ const Form: React.FC = (): React.ReactElement => {
   return (
     <section className="form" id="form">
       <div className="container">
+        <div className="form-title">
+          <h2>Отправь форму</h2>
+        </div>
         <form className="form-wrapper" onSubmit={formik.handleSubmit} ref={formRef}>
           <div className="input-wrapper">
             <div className="floating-input">
