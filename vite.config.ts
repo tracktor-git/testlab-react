@@ -3,13 +3,13 @@ import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import Checker from 'vite-plugin-checker';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     svgr(),
     Checker({ typescript: true }),
   ],
-  base: '/testlab-react',
+  base: mode === 'production' ? '/testlab-react/' : '/',
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
@@ -17,7 +17,7 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           const extType = assetInfo.name?.split('.').at(1);
 
-          let type; /* eslint-disable-line */
+            let type; /* eslint-disable-line */
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType || '')) {
             type = 'img';
           } else if (/ttf|woff|eot/i.test(extType || '')) {
@@ -33,4 +33,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));
