@@ -79,18 +79,26 @@
 .slider-button {
     position: absolute;
     height: 100%;
+    width: 32px;
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    background-position: center center;
     top: 0;
 }
 
 .slider-button.prev {
     left: 0;
-    top: -30px;
+    background-image: url(../../assets/images/icon-arrow.svg);
 }
 
 .slider-button.next {
     right: 0;
-    top: -30px;
     transform: rotate(180deg);
+    background-image: url(../../assets/images/icon-arrow.svg);
+}
+
+.slider-button[disabled] {
+    background-image: url(../../assets/images/icon-arrow-disabled.svg);
 }
 
 .slider-button path {
