@@ -17,7 +17,8 @@ export default defineConfig(({ mode }) => ({
         assetFileNames: (assetInfo) => {
           const extType = assetInfo.name?.split('.').at(1);
 
-            let type; /* eslint-disable-line */
+          let type; /* eslint-disable-line */
+
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType || '')) {
             type = 'img';
           } else if (/ttf|woff|eot/i.test(extType || '')) {

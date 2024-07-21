@@ -11,22 +11,19 @@ import Form from './Components/Form/Form';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-const App: React.FC = () => {
-  console.log('App.tsx');
-  return (
-    <>
-      <Header />
-      <main>
-        <HowItWorks />
-        <Reviews />
-        <Faq />
-        <Columns />
-        <Form />
-      </main>
-      <Footer />
-      <ToastContainer hideProgressBar />
-    </>
-  );
-};
+const App: React.FC = () => (
+  <>
+    <Header />
+    <main>
+      <HowItWorks />
+      <Reviews />
+      <Faq />
+      <Columns />
+      <Form />
+    </main>
+    <Footer />
+    <ToastContainer hideProgressBar />
+  </>
+);
 
 export default App;
