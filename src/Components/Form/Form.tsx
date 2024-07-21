@@ -6,18 +6,21 @@ import { toast } from 'react-toastify';
 import FormSchema from './FormSchema';
 import FloatingInput from '../Common/FloatingInput/FloatingInput';
 import FirmButton from '../Common/FirmButton/FirmButton';
+import FirmCheckbox from '../Common/FirmCheckbox/FirmCheckbox';
 
 import './Form.css';
+
+const formInitialValues = {
+  name: '',
+  phone: '',
+  agree: false,
+};
 
 const Form: React.FC = (): React.ReactElement => {
   const formRef = React.useRef<HTMLFormElement | null>(null);
 
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      phone: '',
-      agree: false,
-    },
+    initialValues: formInitialValues,
     validationSchema: FormSchema,
     validateOnChange: false,
     validateOnBlur: true,
@@ -90,17 +93,12 @@ const Form: React.FC = (): React.ReactElement => {
           </div>
 
           <div className="input-wrapper">
-            <div className="checkbox-wrapper">
-              <input
-                type="checkbox"
-                id="agree"
-                name="agree"
-                onChange={formik.handleChange}
-                checked={formik.values.agree}
-              />
-              {/* eslint-disable-next-line */}
-              <label htmlFor="agree">Согласен, отказываюсь</label>
-            </div>
+            <FirmCheckbox
+              id="agree"
+              label="Согласен, отказываюсь"
+              onChange={formik.handleChange}
+              checked={formik.values.agree}
+            />
 
             <FirmButton
               type="submit"
