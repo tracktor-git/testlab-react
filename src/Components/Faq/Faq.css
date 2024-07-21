@@ -3,7 +3,6 @@
     color: var(--color-black);
 }
 
-/* ------------ ACCORDEON START ------------ */
 .accordion-wrapper {
     max-width: 1008px;
     margin: 40px auto;
@@ -87,7 +86,6 @@
 .accordion-expand .accordion-icon {
   transform: rotate(45deg);
 }
-/* ------------- ACCORDEON END ----------- */
 
 @media (max-width: 960px) {
     .accordion-expand .accordion-body,

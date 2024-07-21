@@ -43,7 +43,7 @@ const Form: React.FC = (): React.ReactElement => {
 
         formik.setFieldValue('agree', false);
         formik.resetForm();
-        if (formRef) formRef.current?.reset();
+        if (formRef.current) formRef.current.reset();
         toast.success('Форма успешно отправлена! ;)');
       } catch (error) {
         if (error instanceof Error) {

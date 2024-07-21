@@ -1,5 +1,3 @@
-/* HEADER START */
-
 .header {
     width: 100%;
     min-height: 960px;
@@ -151,7 +149,6 @@
     }
 
     .nav {
-        /* display: none; */
         position: fixed;
         visibility: hidden;
         background-color: var(--color-white);
@@ -278,5 +275,3 @@
         margin-top: 48px;
     }
 }
-
-/* HEADER END */
