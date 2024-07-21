@@ -12,11 +12,11 @@ type InputProps = {
   mask?: string,
   className?: string | null,
   errorText: string | null,
-  handleChange: (e: React.ChangeEvent<any>) => void,
-  handleBlur: (e: React.FocusEvent<any, Element>) => void,
   isSubmitting: boolean,
   isCompleted?: boolean,
   inputMode?: string | null,
+  handleChange: (e: React.ChangeEvent<any>) => void,
+  handleBlur: (e: React.FocusEvent<any, Element>) => void,
 };
 
 const FloatingInput: React.FC<InputProps> = (props) => {
@@ -28,10 +28,10 @@ const FloatingInput: React.FC<InputProps> = (props) => {
     className,
     errorText,
     isSubmitting,
-    handleChange,
-    handleBlur,
     isCompleted,
     inputMode,
+    handleChange,
+    handleBlur,
   } = props;
 
   return (

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import HowItWorksItem, { HowItWorksProps } from './HowItWorksItem';
+
 import wating from '../../assets/images/icon-waiting.svg';
 import truck from '../../assets/images/icon-truck.svg';
 import secure from '../../assets/images/icon-secure.svg';
@@ -7,6 +9,35 @@ import moneyBag from '../../assets/images/icon-money-bag.svg';
 import middle from '../../assets/images/middle.png';
 
 import './HowItWorks.css';
+
+type HowItWorksData = HowItWorksProps & { id: number };
+
+const data: HowItWorksData[] = [
+  {
+    id: 1,
+    icon: wating,
+    title: 'Прочитай задание внимательно',
+    text: 'Думаю у тебя не займет это больше двух-трех минут',
+  },
+  {
+    id: 2,
+    icon: truck,
+    title: 'Изучи весь макет заранее',
+    text: 'Подумай как это будет работать на разных разрешениях и при скролле',
+  },
+  {
+    id: 3,
+    icon: secure,
+    title: 'Сделай хорошо',
+    text: 'Чтобы мы могли тебе доверить подобные задачи в будущем',
+  },
+  {
+    id: 4,
+    icon: moneyBag,
+    title: 'Получи предложение',
+    text: 'Ну тут все просто, не я придумал правила, но думаю так и будет)))',
+  },
+];
 
 const HowItWorks: React.FC = () => (
   <section id="how-it-works" className="how-it-works">
@@ -16,34 +47,11 @@ const HowItWorks: React.FC = () => (
           <h2>Как это работает</h2>
         </div>
         <div className="how-it-works-features">
-          <div className="how-it-works-item">
-            <div className="how-it-works-icon"><img src={wating} alt="Icon" /></div>
-            <div className="how-it-works-text">
-              <p className="how-it-works-description">Прочитай задание внимательно</p>
-              <p className="how-it-works-subtext">Думаю у тебя не займет это больше двух-трех минут</p>
-            </div>
-          </div>
-          <div className="how-it-works-item">
-            <div className="how-it-works-icon"><img src={truck} alt="Icon" /></div>
-            <div className="how-it-works-text">
-              <p className="how-it-works-description">Изучи весь макет заранее</p>
-              <p className="how-it-works-subtext">Подумай как это будет работать на разных разрешениях и при скролле</p>
-            </div>
-          </div>
-          <div className="how-it-works-item">
-            <div className="how-it-works-icon"><img src={secure} alt="Icon" /></div>
-            <div className="how-it-works-text">
-              <p className="how-it-works-description">Сделай хорошо</p>
-              <p className="how-it-works-subtext">Чтобы мы могли тебе доверить подобные задачи в будущем</p>
-            </div>
-          </div>
-          <div className="how-it-works-item">
-            <div className="how-it-works-icon"><img src={moneyBag} alt="Icon" /></div>
-            <div className="how-it-works-text">
-              <p className="how-it-works-description">Получи предложение</p>
-              <p className="how-it-works-subtext">Ну тут все просто, не я придумал правила, но думаю так и будет)))</p>
-            </div>
-          </div>
+          {
+            data.map(({
+              id, icon, text, title,
+            }) => <HowItWorksItem key={id} icon={icon} title={title} text={text} />)
+          }
         </div>
       </div>
       <div className="how-it-works-bottom">
