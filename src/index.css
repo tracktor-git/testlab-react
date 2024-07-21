@@ -71,46 +71,6 @@ h6 {
     line-height: 1.5;
 }
 
-.button {
-    padding: 20px 40px;
-    font-weight: 700;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-}
-
-.button:active {
-    transform: translate(0, -1px);
-}
-
-.button-default {
-    background-color: var(--color-light-gray);
-    color: var(--color-black);
-}
-
-.button-default:hover {
-    background-color: var(--color-white);
-}
-
-.button-primary {
-    background-color: var(--color-primary);
-    font-weight: 400;
-    color: var(--color-white);
-}
-
-.button-primary[disabled], 
-.button-primary[disabled]:hover {
-    background-color: #9cbcfb;
-    cursor: not-allowed;
-}
-
-.button[disabled]:active {
-    transform: none;
-}
-
-.button-primary:hover {
-    background-color: var(--color-primary-80);
-}
-
 .container {
     margin: 0 auto;
     max-width: 1256px;

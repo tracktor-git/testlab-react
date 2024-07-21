@@ -4,9 +4,9 @@ import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
 
 import FormSchema from './FormSchema';
-import FloatingInput from './FloatingInput';
+import FloatingInput from '../Common/FloatingInput/FloatingInput';
+import FirmButton from '../Common/FirmButton/FirmButton';
 
-import 'react-toastify/dist/ReactToastify.css';
 import './Form.css';
 
 const Form: React.FC = (): React.ReactElement => {
@@ -102,13 +102,14 @@ const Form: React.FC = (): React.ReactElement => {
               <label htmlFor="agree">Согласен, отказываюсь</label>
             </div>
 
-            <button
+            <FirmButton
               type="submit"
-              className={formik.isSubmitting ? 'button button-primary submitting' : 'button button-primary'}
+              variant="primary"
+              isSubmitting={formik.isSubmitting}
               disabled={formik.isSubmitting || !formik.values.agree}
             >
               Отправить
-            </button>
+            </FirmButton>
           </div>
 
         </form>

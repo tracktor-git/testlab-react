@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setColumns } from '../../redux/slices/columnsSlice';
 
 import ColumnItem from './ColumnItem';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../Common/Spinner/Spinner';
 
 import './Columns.css';
 

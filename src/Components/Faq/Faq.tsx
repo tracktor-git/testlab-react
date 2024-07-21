@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { setFaq } from '../../redux/slices/faqSlice';
 
 import Accordion from './Accordion';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../Common/Spinner/Spinner';
 
 import './Faq.css';
 

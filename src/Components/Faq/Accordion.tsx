@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 type AccordionProps = {
   header: string,
@@ -14,7 +15,10 @@ export type AccordionData = {
 const Accordion: React.FC<AccordionProps> = ({ header, body }) => {
   const [expanded, setExpanded] = React.useState(false);
 
-  const className = expanded ? 'accordion accordion-expand' : 'accordion';
+  const className = classNames(
+    'accordion',
+    { 'accordion-expand': expanded },
+  );
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Enter') {

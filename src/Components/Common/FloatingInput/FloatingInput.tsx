@@ -1,5 +1,8 @@
 import React from 'react';
+import classNames from 'classnames';
 import { IMaskMixin } from 'react-imask';
+
+import './FloatingInput.css';
 
 const MaskedInput = IMaskMixin(({ inputRef, ...props }) => (
   <input {...props} ref={inputRef as React.RefObject<HTMLInputElement>} />
@@ -34,6 +37,11 @@ const FloatingInput: React.FC<InputProps> = (props) => {
     handleBlur,
   } = props;
 
+  const inputClassName = classNames(
+    className,
+    { completed: isCompleted },
+  );
+
   return (
     <div className="floating-input">
       <MaskedInput
@@ -43,7 +51,7 @@ const FloatingInput: React.FC<InputProps> = (props) => {
         name={name}
         autoComplete="off"
         mask={mask}
-        className={!isCompleted ? className : `${className} completed`}
+        className={inputClassName}
         placeholder=" "
         onChange={handleChange}
         onBlur={handleBlur}

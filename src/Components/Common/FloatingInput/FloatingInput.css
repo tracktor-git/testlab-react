@@ -1,0 +1,129 @@
+.floating-input {
+    position: relative;
+    width: 100%;
+}
+  
+.floating-input input {
+    width: 100%;
+    background-color: var(--color-extralight-gray);
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: 16px;
+    height: 64px;
+    font-size: 18px;
+    line-height: 1.77;
+    color: var(--color-black);
+    transition: 
+      border 0.1s ease-in,
+      box-shadow 0.1s ease-in,
+      transform 0.1s ease-in,
+      top 0.1s ease-in;
+}
+
+.floating-input input + label {
+    position: absolute;
+    left: 16px;
+    color: var(--color-dark-gray);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.77;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: text;
+    transition: 
+      border .1s ease-in,
+      box-shadow .1s ease-in,
+      transform .1s ease-in,
+      top .1s ease-in,
+      font-size .1s ease-in;
+}
+  
+.floating-input input:focus,
+.floating-input input:active {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-mid-gray);
+    border-radius: 4px;
+    padding: 28px 16px 4px 16px;
+}
+
+.floating-input input.invalid {
+    border: 2px solid var(--color-red);
+    background-color: var(--color-white);
+}
+
+.floating-input input.completed {
+    border: 2px solid var(--color-light-gray);
+    background-color: var(--color-white);
+}
+
+.floating-input input:not([placeholder=" "])::placeholder {
+    color: transparent;
+}
+
+.floating-input input:not(:placeholder-shown) {
+    padding: 28px 16px 4px 14px;
+}
+
+.floating-input input:not(:placeholder-shown) + label {
+    color: var(--color-gray);
+}
+  
+.floating-input input:focus + label,
+.floating-input input:not(:placeholder-shown) + label {
+    transform: unset;
+    top: 8px;
+    left: 16px;
+    font-size: 14px;
+}
+
+.input-state {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    right: 22px;
+    top: 22px;
+}
+
+.input-state.success {
+    background-color: var(--color-green);
+}
+
+.input-state.success::after {
+    content: '✓';
+    color: var(--color-white);
+    position: relative;
+    left: 4px;
+    top: -1px;
+}
+
+.input-state.error {
+    background-color: var(--color-red);
+}
+
+.input-state.error::after {
+    content: '✖';
+    color: var(--color-white);
+    position: relative;
+    left: 4px;
+    top: -1px;
+}
+
+.floating-input input::after {
+    content: attr(data-error-text);
+    display: block;
+    border: 1px solid red;
+    width: 300px;
+    height: 300px;
+}
+
+.error-text {
+    position: absolute;
+    display: block;
+    color: var(--color-red);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.33;
+    bottom: -20px;
+}

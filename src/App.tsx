@@ -9,6 +9,8 @@ import Faq from './Components/Faq/Faq';
 import Columns from './Components/Columns/Columns';
 import Form from './Components/Form/Form';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const App: React.FC = () => {
   console.log('App.tsx');
   return (

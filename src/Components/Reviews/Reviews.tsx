@@ -8,7 +8,7 @@ import { setReviews } from '../../redux/slices/reviewsSlice';
 import Slide from './Slide';
 import SlideNavButtons from './SlideNavButtons';
 import SliderPagination from './SliderPagination';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../Common/Spinner/Spinner';
 
 import './Reviews.css';
 
