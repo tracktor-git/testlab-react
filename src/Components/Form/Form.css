@@ -207,8 +207,32 @@
 }
 
 .form-wrapper .button-primary {
+    position: relative;
     width: 100%;
     flex: 50%;
+}
+
+.form-wrapper .button-primary.submitting::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    top: 50%;
+    border: 3px solid var(--color-white);
+    border-top-color: transparent;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: rotateSubmitting 1s ease-in-out infinite;
+}
+
+@keyframes rotateSubmitting {
+    0% {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 @media (max-width: 640px) {

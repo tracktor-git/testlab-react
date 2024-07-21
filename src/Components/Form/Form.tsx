@@ -37,6 +37,7 @@ const Form: React.FC = (): React.ReactElement => {
 
         const data = await response.json();
         console.log(data);
+
         formik.setFieldValue('agree', false);
         formik.resetForm();
         if (formRef) formRef.current?.reset();
@@ -58,6 +59,7 @@ const Form: React.FC = (): React.ReactElement => {
         <div className="form-title">
           <h2>Отправь форму</h2>
         </div>
+
         <form className="form-wrapper" onSubmit={formik.handleSubmit} ref={formRef}>
           <div className="input-wrapper">
             <FloatingInput
@@ -102,7 +104,7 @@ const Form: React.FC = (): React.ReactElement => {
 
             <button
               type="submit"
-              className="button button-primary"
+              className={formik.isSubmitting ? 'button button-primary submitting' : 'button button-primary'}
               disabled={formik.isSubmitting || !formik.values.agree}
             >
               Отправить
