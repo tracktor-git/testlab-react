@@ -70,7 +70,7 @@ const Form: React.FC = (): React.ReactElement => {
               name="name"
               label="Имя"
               className={formik.errors.name ? 'invalid' : null}
-              errorText={formik.errors.name ?? null}
+              errorText={formik.errors.name}
               handleBlur={formik.handleBlur}
               handleChange={formik.handleChange}
               isSubmitting={formik.isSubmitting}
@@ -84,7 +84,7 @@ const Form: React.FC = (): React.ReactElement => {
               mask="+{7} (000) 000 00 00"
               inputMode="numeric"
               className={formik.errors.phone ? 'invalid' : null}
-              errorText={formik.errors.phone ?? null}
+              errorText={formik.errors.phone}
               handleBlur={formik.handleBlur}
               handleChange={formik.handleChange}
               isSubmitting={formik.isSubmitting}

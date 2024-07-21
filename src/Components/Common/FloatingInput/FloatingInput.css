@@ -2,7 +2,14 @@
     position: relative;
     width: 100%;
 }
-  
+
+.floating-input label {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
 .floating-input input {
     width: 100%;
     background-color: var(--color-extralight-gray);
@@ -19,8 +26,8 @@
       transform 0.1s ease-in,
       top 0.1s ease-in;
 }
-
-.floating-input input + label {
+  
+.floating-input label span {
     position: absolute;
     left: 16px;
     color: var(--color-dark-gray);
@@ -31,13 +38,13 @@
     transform: translateY(-50%);
     cursor: text;
     transition: 
-      border .1s ease-in,
-      box-shadow .1s ease-in,
-      transform .1s ease-in,
-      top .1s ease-in,
-      font-size .1s ease-in;
+      border 0.1s ease-in,
+      box-shadow 0.1s ease-in,
+      transform 0.1s ease-in,
+      top 0.1s ease-in,
+      font-size 0.1s ease-in;
 }
-  
+
 .floating-input input:focus,
 .floating-input input:active {
     background-color: var(--color-white);
@@ -64,12 +71,12 @@
     padding: 28px 16px 4px 14px;
 }
 
-.floating-input input:not(:placeholder-shown) + label {
+.floating-input input:not(:placeholder-shown) + span {
     color: var(--color-gray);
 }
-  
-.floating-input input:focus + label,
-.floating-input input:not(:placeholder-shown) + label {
+
+.floating-input input:focus + span,
+.floating-input input:not(:placeholder-shown) + span {
     transform: unset;
     top: 8px;
     left: 16px;
@@ -108,14 +115,6 @@
     position: relative;
     left: 4px;
     top: -1px;
-}
-
-.floating-input input::after {
-    content: attr(data-error-text);
-    display: block;
-    border: 1px solid red;
-    width: 300px;
-    height: 300px;
 }
 
 .error-text {

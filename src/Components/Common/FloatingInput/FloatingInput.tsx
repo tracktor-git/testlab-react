@@ -14,12 +14,12 @@ type InputProps = {
   label: string,
   mask?: string,
   className?: string | null,
-  errorText: string | null,
-  isSubmitting: boolean,
+  errorText?: string | undefined,
+  isSubmitting?: boolean,
   isCompleted?: boolean,
   inputMode?: string | null,
-  handleChange: (e: React.ChangeEvent<any>) => void,
-  handleBlur: (e: React.FocusEvent<any, Element>) => void,
+  handleChange?: (e: React.ChangeEvent<any>) => void,
+  handleBlur?: (e: React.FocusEvent<any, Element>) => void,
 };
 
 const FloatingInput: React.FC<InputProps> = (props) => {
@@ -37,31 +37,38 @@ const FloatingInput: React.FC<InputProps> = (props) => {
     handleBlur,
   } = props;
 
+  const isError = !!errorText;
+
   const inputClassName = classNames(
     className,
     { completed: isCompleted },
   );
 
+  const inputStateClassName = classNames('input-state', {
+    success: isCompleted,
+    error: isError,
+  });
+
   return (
     <div className="floating-input">
-      <MaskedInput
-        type="text"
-        inputMode={inputMode}
-        id={id}
-        name={name}
-        autoComplete="off"
-        mask={mask}
-        className={inputClassName}
-        placeholder=" "
-        onChange={handleChange}
-        onBlur={handleBlur}
-        disabled={isSubmitting}
-      />
-      {/* eslint-disable-next-line */}
-      <label htmlFor={name}>{label}</label> 
-      {errorText && <span className="error-text">{errorText}</span>}
-      {isCompleted && <div className="input-state success" />}
-      {errorText && <div className="input-state error" />}
+      <label htmlFor={id}>
+        <MaskedInput
+          type="text"
+          autoComplete="off"
+          placeholder=" "
+          id={id}
+          name={name}
+          mask={mask}
+          inputMode={inputMode}
+          className={inputClassName}
+          disabled={isSubmitting}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <span>{label}</span>
+      </label>
+      {isError && <span className="error-text">{errorText}</span>}
+      {(isCompleted || isError) && <div className={inputStateClassName} />}
     </div>
   );
 };
