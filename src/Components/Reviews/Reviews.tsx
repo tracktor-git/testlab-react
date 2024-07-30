@@ -17,26 +17,28 @@ const Reviews: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const isMounted = React.useRef(false);
 
+  /* Предотвращение дублирования данных в React.StrictMode */
+  React.useEffect(() => {
+    isMounted.current = !isMounted.current;
+  }, []);
+
   const slides = useAppSelector((state) => state.reviews);
   const dispatch = useAppDispatch();
 
   /* Имитируем загрузку отзывов с сервера */
   React.useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-      return;
+    if (isMounted.current) {
+      setIsLoading(true);
+
+      fetch('./data/reviews.json')
+        .then((data) => data.json())
+        .then((data) => dispatch(setReviews(data)))
+        .catch((error) => {
+          toast.error('Не удалось загрузить отзывы...');
+          console.error(error.message);
+        })
+        .finally(() => setIsLoading(false));
     }
-
-    setIsLoading(true);
-
-    fetch('./data/reviews.json')
-      .then((data) => data.json())
-      .then((data) => dispatch(setReviews(data)))
-      .catch((error) => {
-        toast.error('Не удалось загрузить отзывы...');
-        console.error(error.message);
-      })
-      .finally(() => setIsLoading(false));
   }, [dispatch]);
 
   const breakpointsOptions = {
