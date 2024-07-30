@@ -8,33 +8,14 @@
     color: var(--color-black);
 }
 
-.reviews-slider {
-    position: relative;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    gap: 32px;
-}
-
 .slider-item {
     display: block;
     background-color: var(--color-white);
     padding: 22px;
-    width: 341px;
-    height: auto;
+    max-width: 340px;
+    height: 100%;
     border-radius: 8px;
-    box-shadow: 0px 5px 24px 0px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s ease;
     user-select: none;
-}
-
-.slider-item.hidden {
-    display: none;
-}
-
-.slider-item:hover {
-    box-shadow: 0px 15px 24px 0px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
@@ -72,8 +53,31 @@
     line-height: 1.33;
 }
 
-.swiper-container {
+/* SWIPER START */
+
+.slider-wrapper {
     position: relative;
+    margin: 0 auto;
+}
+
+.swiper {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    max-width: 1080px !important;
+    filter: drop-shadow(0px 5px 24px rgba(0, 0, 0, 0.12));
+}
+
+.swiper-slide {
+    flex-basis: 340px !important;
+    height: auto !important;
+    transition: transform 0.2s ease;
+}
+
+/* Пришлось пожертвовать тенью на hover, так как
+   она обрезается свойством overflow: hidden
+   на контейнере слайдов... */
+.swiper-slide:hover {
+    transform: scale(0.985);
 }
 
 .slider-button {
@@ -83,7 +87,7 @@
     background-repeat: no-repeat;
     background-size: 32px 32px;
     background-position: center center;
-    top: 0;
+    top: -25px;
 }
 
 .slider-button.prev {
@@ -101,14 +105,6 @@
     background-image: url(../../assets/images/icon-arrow-disabled.svg);
 }
 
-.slider-button path {
-    fill: var(--color-primary);
-}
-
-.slider-button[disabled] path {
-    fill: var(--color-mid-gray);
-}
-
 .slider-bullets {
     display: flex;
     align-items: center;
@@ -117,17 +113,45 @@
     margin-top: 40px;
 }
 
-.slider-bullets .bullet {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--color-mid-gray);
-    cursor: pointer;
+.swiper-pagination-bullet {
+    margin: unset !important;
+    background-color: var(--color-mid-gray) !important;
+    opacity: 1 !important;
+    transition: background-color 0.3s ease;
 }
 
-.slider-bullets .bullet.active {
-    background-color: var(--color-primary);
+.swiper-pagination-bullet-active {
+    background-color: var(--color-primary) !important;
 }
+
+@media (max-width: 1200px) {
+    .swiper {
+        max-width: 710px !important;
+    }
+
+    .slider-wrapper {
+        max-width: 830px;
+    }
+}
+
+@media (max-width: 786px) {
+    .swiper {
+        max-width: 340px !important;
+    }
+
+    /* На мобильных устройствах нет hover */
+    .swiper-slide:hover {
+        transform: unset;
+    }
+}
+
+@media (max-width: 420px) {
+    .swiper-slide {
+        flex-basis: unset !important;
+    }
+}
+
+/* SWIPER END */
 
 @media (max-width: 1279px) {
     .reviews-slider {

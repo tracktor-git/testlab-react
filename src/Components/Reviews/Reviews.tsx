@@ -1,68 +1,59 @@
 import React from 'react';
 
-import { useSwipeable } from 'react-swipeable';
 import { toast } from 'react-toastify';
-import { useMatchMedia, useAppDispatch, useAppSelector } from '../../hooks';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setReviews } from '../../redux/slices/reviewsSlice';
 
 import Slide from './Slide';
-import SlideNavButtons from './SlideNavButtons';
-import SliderPagination from './SliderPagination';
 import Spinner from '../Common/Spinner/Spinner';
 
+import 'swiper/css';
+import 'swiper/css/pagination';
 import './Reviews.css';
 
 const Reviews: React.FC = () => {
-  const [offset, setOffset] = React.useState(0);
-  const [slidesPerPage, setSlidesPerPage] = React.useState(3);
   const [isLoading, setIsLoading] = React.useState(false);
-  const { isMobile, isTablet, isDesktop } = useMatchMedia();
-
   const isMounted = React.useRef(false);
 
-  /* Предотвращение дублирования данных в React.StrictMode */
-  React.useEffect(() => {
-    isMounted.current = !isMounted.current;
-  }, []);
-
-  const reviews = useAppSelector((state) => state.reviews);
+  const slides = useAppSelector((state) => state.reviews);
   const dispatch = useAppDispatch();
 
   /* Имитируем загрузку отзывов с сервера */
   React.useEffect(() => {
-    if (isMounted.current) {
-      setIsLoading(true);
-
-      fetch('./data/reviews.json')
-        .then((data) => data.json())
-        .then((data) => dispatch(setReviews(data)))
-        .catch((error) => {
-          toast.error('Не удалось загрузить отзывы...');
-          console.error(error.message);
-        })
-        .finally(() => setIsLoading(false));
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
     }
+
+    setIsLoading(true);
+
+    fetch('./data/reviews.json')
+      .then((data) => data.json())
+      .then((data) => dispatch(setReviews(data)))
+      .catch((error) => {
+        toast.error('Не удалось загрузить отзывы...');
+        console.error(error.message);
+      })
+      .finally(() => setIsLoading(false));
   }, [dispatch]);
 
-  /* Устанавливаем количество слайдов на странице в зависимости от размера экрана */
-  React.useEffect(() => {
-    if (isMobile) setSlidesPerPage(1);
-    if (isTablet) setSlidesPerPage(2);
-    if (isDesktop) setSlidesPerPage(3);
-  }, [isMobile, isTablet, isDesktop]);
+  const breakpointsOptions = {
+    461: { slidesPerView: 1 },
+    787: { slidesPerView: 2 },
+    1201: { slidesPerView: 3 },
+  };
 
-  /* Возвращаем на первый слайд когда меняется размер экрана */
-  React.useEffect(() => setOffset(0), [slidesPerPage]);
+  const navigationOptions = {
+    nextEl: '.slider-button.next',
+    prevEl: '.slider-button.prev',
+  };
 
-  const increase = () => offset < reviews.length - slidesPerPage && setOffset((prev) => prev + 1);
-  const decrease = () => offset > 0 && setOffset((prev) => prev - 1);
-
-  /* Добавляем возможность переключения слайдов свайпом */
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: increase,
-    onSwipedRight: decrease,
-    trackMouse: true,
-  });
+  const paginationOptions = {
+    el: '.slider-bullets',
+    clickable: true,
+  };
 
   return (
     <section id="reviews" className="reviews">
@@ -72,33 +63,33 @@ const Reviews: React.FC = () => {
         </div>
 
         {isLoading && <Spinner />}
-        {(!isLoading && reviews.length < 1) && <div className="data-empty">Нет отзывов...</div>}
+        {(!isLoading && slides.length < 1) && <div className="data-empty">Нет отзывов...</div>}
 
-        <div className="reviews-slider" {...swipeHandlers}>
-          {reviews.slice(offset, offset + slidesPerPage).map((slide) => (
-            <Slide
-              key={slide.id}
-              city={slide.city}
-              text={slide.text}
-              name={slide.name}
-              avatar={slide.avatar}
-            />
-          ))}
-
-          <SlideNavButtons
-            handleNext={increase}
-            handlePrev={decrease}
-            isNextDisabled={offset === reviews.length - slidesPerPage}
-            isPrevDisabled={offset === 0}
-            isShown={reviews.length !== 0}
-          />
+        <div className="slider-wrapper">
+          <Swiper
+            spaceBetween={30}
+            breakpoints={breakpointsOptions}
+            navigation={navigationOptions}
+            pagination={paginationOptions}
+            modules={[Navigation, Pagination]}
+          >
+            {
+              slides.map((slide) => (
+                <SwiperSlide key={slide.id}>
+                  <Slide
+                    avatar={slide.avatar}
+                    city={slide.city}
+                    name={slide.name}
+                    text={slide.text}
+                  />
+                </SwiperSlide>
+              ))
+            }
+          </Swiper>
+          <button type="button" className="slider-button next" />
+          <button type="button" className="slider-button prev" />
+          <div className="slider-bullets" />
         </div>
-
-        <SliderPagination
-          length={reviews.length - slidesPerPage + 1}
-          offset={offset}
-          handleClick={setOffset}
-        />
       </div>
     </section>
   );
